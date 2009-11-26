@@ -298,7 +298,6 @@ module OAuth
 
       if [:post, :put].include?(http_method)
         data = arguments.shift
-        data.reject! { |k,v| v.nil? } if data.is_a?(Hash)
       end
 
       headers = arguments.first.is_a?(Hash) ? arguments.shift : {}
@@ -321,7 +320,9 @@ module OAuth
       end
 
       if data.is_a?(Hash)
-        request.set_form_data(data)
+        form_data = {}
+        data.each {|k,v| form_data[k.to_s] = v if !v.nil?} 
+        request.set_form_data(form_data)
       elsif data
         if data.respond_to?(:read)
           request.body_stream = data
