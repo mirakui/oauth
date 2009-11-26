@@ -216,10 +216,10 @@ class ConsumerTest < Test::Unit::TestCase
     assert !@consumer.access_token_url?, "Should not use fully qualified access token url"
     assert !@consumer.authorize_url?, "Should not use fully qualified url"
 
-    @request_token=@consumer.get_request_token
+    @request_token = @consumer.get_request_token
     assert_not_nil @request_token
-    assert_equal "requestkey",@request_token.token
-    assert_equal "requestsecret",@request_token.secret
+    assert_equal "requestkey", @request_token.token
+    assert_equal "requestsecret", @request_token.secret
     assert_equal "http://term.ie/oauth/example/authorize.php?oauth_token=requestkey",@request_token.authorize_url
 
     @access_token=@request_token.get_access_token
